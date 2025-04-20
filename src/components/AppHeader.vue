@@ -1,31 +1,26 @@
 <template>
   <header class="bg-gray-800 text-white w-full flex items-center justify-center">
-    <div class="text-center">
+    <div class="text-center h-screen flex flex-col justify-between pb-2">
       <!-- Logo -->
-      <div class="h-screen">
+      <div class="h-[70%]">
         <img src="/hima_dark_no_bg.png" alt="Logo de l'association" class="w-full h-full object-contain" />
       </div>
 
       <!-- Navigation -->
-      <div class="flex flex-col absolute bottom-0 left-0 right-0 p-4">
-        <nav class="mb-8">
+      <div class="">
+        <nav class="mb-8 flex flex-wrap items-center justify-center gap-4">
           <a href="#accueil" class="text-lg mx-4 hover:text-blue-400">Accueil</a>
           <a href="#projets" class="text-lg mx-4 hover:text-blue-400">Projets</a>
           <a href="#contact" class="text-lg mx-4 hover:text-blue-400">Contact</a>
+          <a href="#adhesion" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-400 transition">Adhérer</a>
         </nav>
-
-        <!-- Call to Action Button -->
-        <div>
-          <button @click="handleCTA" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-400 transition">Adhérer</button>
-        </div>
       </div>
+      <ChevronScroll />
     </div>
   </header>
 </template>
 <script setup lang="ts">
-const handleCTA = () => {
-  console.log("tay");
-};
+import ChevronScroll from "./ChevronScroll.vue";
 </script>
 
 <style scoped></style>
