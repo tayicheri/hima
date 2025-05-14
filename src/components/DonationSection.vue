@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gradient-to-r from-indigo-50 to-white py-12 px-4">
+  <section id="donation" class="bg-gradient-to-r from-indigo-50 to-white py-12 px-4">
     <div class="max-w-3xl mx-auto text-center">
       <h2 class="text-3xl font-bold text-gray-800 mb-4">Soutenez notre association</h2>
       <p class="text-gray-600 mb-8">

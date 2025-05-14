@@ -10,9 +10,9 @@
       <div class="">
         <nav class="mb-8 flex flex-wrap items-center justify-center gap-4">
           <a href="#accueil" class="text-lg mx-4 hover:text-blue-400">Accueil</a>
-          <a href="#projets" class="text-lg mx-4 hover:text-blue-400">Projets</a>
+          <a href="#actions" class="text-lg mx-4 hover:text-blue-400">Projets</a>
           <a href="#contact" class="text-lg mx-4 hover:text-blue-400">Contact</a>
-          <a href="#adhesion" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-400 transition">Adhérer</a>
+          <a href="#donation" class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-400 transition">Adhérer</a>
         </nav>
       </div>
       <ChevronScroll />

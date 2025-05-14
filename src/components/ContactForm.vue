@@ -1,5 +1,5 @@
 <template>
-  <section class="flex justify-center">
+  <section id="contact" class="flex justify-center">
     <div class="w-2xl p-6 bg-white rounded-2xl shadow-md">
       <h2 class="text-2xl font-semibold mb-4 text-center text-gray-800">Contactez-Nous</h2>
       <form @submit.prevent="handleSubmit" class="space-y-4">
