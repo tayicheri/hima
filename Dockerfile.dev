@@ -1,0 +1,16 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Installer les dépendances
+COPY package*.json ./
+RUN npm install
+
+# Copier le reste du code
+COPY . .
+
+# Exposer le port du serveur de dev (Vite = 5173, Vue-CLI = 8080)
+EXPOSE 5173
+
+# Lancer le serveur de dev
+CMD ["npm", "run", "dev", "--", "--host"]
