@@ -1,7 +1,9 @@
 <template>
   <section id="actions" class="bg-gray-100 py-16">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">Nos Objectifs</h2>
+      <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">
+        Nos Objectifs
+      </h2>
 
       <div class="relative">
         <!-- Dégradé gauche -->
@@ -17,8 +19,19 @@
           style="width: 100px"
         ></div>
         <!-- Conteneur scrollable -->
-        <div ref="scrollContainer" class="flex overflow-x-auto space-x-8 pb-4" @scroll="handleScroll">
-          <Card v-for="(project, index) in projects" :key="index" :title="project.title" :description="project.description" :imageSrc="project.imageSrc" :link="project.link" />
+        <div
+          ref="scrollContainer"
+          class="flex overflow-x-auto space-x-8 pb-4"
+          @scroll="handleScroll"
+        >
+          <Card
+            v-for="(project, index) in projects"
+            :key="index"
+            :title="project.title"
+            :description="project.description"
+            :imageSrc="project.imageSrc"
+            :link="project.link"
+          />
         </div>
       </div>
     </div>
@@ -27,7 +40,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from "vue";
-import Card from "./Card.vue";
+import Card from "@/components/Card.vue";
 
 const scrollContainer = ref<HTMLElement | null>(null);
 const canScrollLeft = ref(false);
@@ -71,31 +84,36 @@ const projects = ref([
   },
   {
     title: "Projet 4",
-    description: "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
+    description:
+      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
     imageSrc: "https://via.placeholder.com/400x300",
     link: "#",
   },
   {
     title: "Projet 4",
-    description: "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
+    description:
+      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
     imageSrc: "https://via.placeholder.com/400x300",
     link: "#",
   },
   {
     title: "Projet 4",
-    description: "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
+    description:
+      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
     imageSrc: "https://via.placeholder.com/400x300",
     link: "#",
   },
   {
     title: "Projet 4",
-    description: "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
+    description:
+      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
     imageSrc: "https://via.placeholder.com/400x300",
     link: "#",
   },
   {
     title: "Projet 4",
-    description: "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
+    description:
+      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
     imageSrc: "https://via.placeholder.com/400x300",
     link: "#",
   },

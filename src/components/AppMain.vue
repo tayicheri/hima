@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ActionsSection from "./ActionsSection.vue";
-import ContactForm from "./ContactForm.vue";
-import DonationSection from "./DonationSection.vue";
+import ActionsSection from "@/components/ActionsSection.vue";
+import ContactForm from "@/components/ContactForm.vue";
+import DonationSection from "@/components/DonationSection.vue";
 </script>
 <template>
   <main class="flex-grow flex flex-col gap-7">
