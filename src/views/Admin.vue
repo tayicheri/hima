@@ -6,8 +6,7 @@ import Spinner from "@/components/Spinner.vue";
 const user = ref(null);
 const email = ref("");
 const password = ref("");
-const articles = ref([]);
-const medias = ref({}); // dictionnaire { articleId: [liste médias] }
+
 const loading = ref(true);
 
 // Vérifie si un utilisateur est déjà connecté
@@ -15,7 +14,6 @@ onMounted(async () => {
   const { data } = await supabase.auth.getUser();
   user.value = data.user;
   loading.value = false;
-  if (user.value) fetchArticles();
 });
 
 // Connexion
@@ -27,7 +25,6 @@ async function signIn() {
   if (error) alert(error.message);
   else {
     user.value = data.user;
-    fetchArticles();
   }
 }
 
@@ -40,28 +37,6 @@ async function signOut() {
 }
 
 // Récupérer les articles et leurs médias
-
-// Supprimer un article
-async function deleteArticle(id) {
-  if (!confirm("Supprimer cet article et ses médias ?")) return;
-  const { error } = await supabase.from("articles").delete().eq("id", id);
-  if (error) alert(error.message);
-  else fetchArticles();
-}
-
-// Modifier un article
-async function updateArticle(article) {
-  const title = prompt("Nouveau titre :", article.title);
-  const content = prompt("Nouveau contenu :", article.content);
-  if (!title || !content) return;
-
-  const { error } = await supabase
-    .from("articles")
-    .update({ title, content })
-    .eq("id", article.id);
-  if (error) alert(error.message);
-  else fetchArticles();
-}
 
 // Supprimer un média
 </script>
@@ -108,7 +83,7 @@ async function updateArticle(article) {
           </button>
         </div>
       </div>
+      <router-view />
     </div>
-    <router-view />
   </div>
 </template>

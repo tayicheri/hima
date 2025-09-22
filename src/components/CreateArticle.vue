@@ -58,6 +58,12 @@
           @change="handleFileChange"
           class="w-full p-2 border rounded-md"
         />
+        <div v-if="imagePreview" class="mt-2">
+          <img
+            :src="imagePreview"
+            class="w-48 h-48 object-cover rounded-md border"
+          />
+        </div>
       </div>
 
       <!-- Bouton -->
@@ -90,12 +96,14 @@ const imageFile = ref<File | null>(null);
 const message = ref("");
 const categorie = ref("");
 const errorMessage = ref("");
+const imagePreview = ref<string | null>(null);
 
 // Gérer la sélection du fichier
 function handleFileChange(event: Event) {
   const target = event.target as HTMLInputElement;
   if (target.files && target.files[0]) {
     imageFile.value = target.files[0];
+    imagePreview.value = URL.createObjectURL(imageFile.value);
   }
 }
 
