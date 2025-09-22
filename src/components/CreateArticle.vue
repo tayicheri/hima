@@ -14,6 +14,17 @@
           placeholder="Titre de l'article"
         />
       </div>
+      <!-- Categorie -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Catégorie</label>
+        <input
+          v-model="categorie"
+          type="text"
+          required
+          class="w-full p-2 border rounded-md"
+          placeholder="Categorie de l'article"
+        />
+      </div>
 
       <!-- Contenu -->
       <div>
@@ -35,6 +46,17 @@
           type="text"
           class="w-full p-2 border rounded-md"
           placeholder="Nom de l'auteur"
+        />
+      </div>
+
+      <!-- Image principale -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Image principale</label>
+        <input
+          type="file"
+          accept="image/*"
+          @change="handleFileChange"
+          class="w-full p-2 border rounded-md"
         />
       </div>
 
@@ -64,18 +86,52 @@ import supabase from "@/lib/supabaseClient";
 const title = ref("");
 const content = ref("");
 const author = ref("");
+const imageFile = ref<File | null>(null);
 const message = ref("");
+const categorie = ref("");
 const errorMessage = ref("");
+
+// Gérer la sélection du fichier
+function handleFileChange(event: Event) {
+  const target = event.target as HTMLInputElement;
+  if (target.files && target.files[0]) {
+    imageFile.value = target.files[0];
+  }
+}
 
 async function createArticle() {
   message.value = "";
   errorMessage.value = "";
 
-  const { data, error } = await supabase.from("articles").insert([
+  let imageUrl = "";
+
+  // Upload image si sélectionnée
+  if (imageFile.value) {
+    const fileName = `articles/${Date.now()}`;
+    const { error: uploadError } = await supabase.storage
+      .from("hima_medias")
+      .upload(fileName, imageFile.value);
+
+    if (uploadError) {
+      errorMessage.value =
+        "❌ Erreur lors de l'upload de l'image : " + uploadError.message;
+      return;
+    }
+
+    // Obtenir l'URL publique
+    const { data: publicData } = supabase.storage
+      .from("articles-images")
+      .getPublicUrl(fileName);
+    imageUrl = publicData.publicUrl;
+  }
+
+  const { error } = await supabase.from("articles").insert([
     {
       title: title.value,
       content: content.value,
       author: author.value,
+      categorie: categorie.value,
+      image_url: imageUrl, // Assure-toi que la colonne existe dans ta table
     },
   ]);
 
@@ -86,6 +142,7 @@ async function createArticle() {
     title.value = "";
     content.value = "";
     author.value = "";
+    imageFile.value = null;
   }
 }
 </script>
