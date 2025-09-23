@@ -12,6 +12,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from "vue";
 import { Ckeditor, useCKEditorCloud } from "@ckeditor/ckeditor5-vue";
+import supabase from "@/lib/supabaseClient";
 
 // Props & Emits pour v-model
 const props = defineProps({
@@ -58,6 +59,46 @@ const editor = computed(() => {
   return cloud.data.value.CKEditor.ClassicEditor;
 });
 
+// --- 🔥 Custom Upload Adapter Supabase
+class SupabaseUploadAdapter {
+  constructor(loader) {
+    this.loader = loader;
+  }
+
+  async upload() {
+    const file = await this.loader.file;
+    const fileName = `articles/${Date.now()}`;
+    const { error } = await supabase.storage
+      .from("hima_medias") // ⚠️ ton bucket Supabase
+      .upload(fileName, file);
+
+    if (error) {
+      console.error("Supabase upload error:", error);
+      throw error;
+    }
+
+    // Obtenir l’URL publique
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from("hima_medias").getPublicUrl(fileName);
+
+    return {
+      default: publicUrl,
+    };
+  }
+
+  abort() {
+    // Optionnel
+  }
+}
+
+// --- Plugin pour CKEditor
+function SupabaseUploadAdapterPlugin(editor) {
+  editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+    return new SupabaseUploadAdapter(loader);
+  };
+}
+
 const config = computed(() => {
   if (!isLayoutReady.value) {
     return null;
@@ -74,8 +115,8 @@ const config = computed(() => {
     Autosave,
     BlockQuote,
     Bold,
-    CKBox,
-    CloudServices,
+    // CKBox,
+    // CloudServices,
     CodeBlock,
     Essentials,
     GeneralHtmlSupport,
@@ -144,8 +185,8 @@ const config = computed(() => {
       Autosave,
       BlockQuote,
       Bold,
-      CKBox,
-      CloudServices,
+      // CKBox,
+      // CloudServices,
       CodeBlock,
       Essentials,
       GeneralHtmlSupport,
@@ -178,6 +219,7 @@ const config = computed(() => {
       TableToolbar,
       Underline,
     ],
+    extraPlugins: [SupabaseUploadAdapterPlugin],
     cloudServices: {
       tokenUrl: CLOUD_SERVICES_TOKEN_URL,
     },

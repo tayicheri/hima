@@ -92,18 +92,20 @@ async function deleteArticle(id) {
   else fetchArticles();
 }
 
-// Modifier un article
-async function updateArticle(article) {
-  const title = prompt("Nouveau titre :", article.title);
-  const content = prompt("Nouveau contenu :", article.content);
-  if (!title || !content) return;
+async function togglePublie(article) {
+  const newStatus = !article.publie;
 
   const { error } = await supabase
-    .from("articles")
-    .update({ title, content })
+    .from("articles") // nom de ta table
+    .update({ publie: newStatus })
     .eq("id", article.id);
-  if (error) alert(error.message);
-  else fetchArticles();
+
+  if (error) {
+    console.error("Erreur lors de la mise à jour :", error);
+  } else {
+    // Mise à jour locale pour refléter le changement
+    article.publie = newStatus;
+  }
 }
 </script>
 
@@ -113,10 +115,10 @@ async function updateArticle(article) {
   <div v-else>
     <div v-for="a in articles" :key="a.id" class="border p-4 mb-4 rounded">
       <h3 class="font-bold text-lg">{{ a.title }}</h3>
-      <p class="mb-2">{{ a.content }}</p>
+      <p class="mb-2 line-clamp-2">{{ a.content }}</p>
 
       <!-- Boutons article -->
-      <div class="mb-3">
+      <div class="mb-3 flex flex-row space-x-4">
         <button
           @click="$router.push('/lekeza/update/' + a.id)"
           class="bg-yellow-500 text-white px-2 py-1 mr-2"
@@ -129,6 +131,20 @@ async function updateArticle(article) {
         >
           Supprimer
         </button>
+        <!-- Switch Publie stylisé -->
+        <div class="flex items-center space-x-2">
+          <span class="text-sm font-medium text-gray-700">Publié</span>
+          <button
+            @click="togglePublie(a)"
+            :class="a.publie ? 'bg-green-500' : 'bg-gray-300'"
+            class="relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none"
+          >
+            <span
+              :class="a.publie ? 'translate-x-6' : 'translate-x-1'"
+              class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-200"
+            ></span>
+          </button>
+        </div>
       </div>
 
       <!-- Upload média -->
