@@ -27,16 +27,10 @@
         />
       </div>
 
-      <!-- Contenu -->
+      <!-- Contenu avec CKEditor -->
       <div>
         <label class="block text-sm font-medium mb-1">Contenu</label>
-        <textarea
-          v-model="content"
-          rows="5"
-          required
-          class="w-full p-2 border rounded-md"
-          placeholder="Rédigez votre contenu ici..."
-        ></textarea>
+        <Editor v-model="content" />
       </div>
 
       <!-- Auteur -->
@@ -92,6 +86,7 @@ import { ref, onMounted } from "vue";
 import supabase from "@/lib/supabaseClient";
 import { useRoute } from "vue-router";
 import Spinner from "./Spinner.vue";
+import Editor from "@/Editor.vue";
 
 const route = useRoute();
 const articleId = ref<number | null>(null);
@@ -155,7 +150,7 @@ async function updateArticle() {
   let imageUrl = "";
 
   if (imageFile.value) {
-    const fileName = `article/${Date.now()}_${imageFile.value.name}`;
+    const fileName = `articles/${Date.now()}`;
     const { error: uploadError } = await supabase.storage
       .from("hima_medias")
       .upload(fileName, imageFile.value);

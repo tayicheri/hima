@@ -26,16 +26,10 @@
         />
       </div>
 
-      <!-- Contenu -->
+      <!-- Contenu avec CKEditor -->
       <div>
         <label class="block text-sm font-medium mb-1">Contenu</label>
-        <textarea
-          v-model="content"
-          rows="5"
-          required
-          class="w-full p-2 border rounded-md"
-          placeholder="Rédigez votre contenu ici..."
-        ></textarea>
+        <Editor v-model="content" />
       </div>
 
       <!-- Auteur -->
@@ -88,6 +82,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import supabase from "@/lib/supabaseClient";
+import Editor from "@/Editor.vue";
 
 const title = ref("");
 const content = ref("");

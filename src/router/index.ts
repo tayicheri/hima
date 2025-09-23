@@ -19,15 +19,18 @@ const routes = [
     component: Admin,
     children: [
       {
+        name: "ListArticles",
         path: "", // /admin → liste
         component: ListArticles,
       },
       {
+        name: "CreateArticle",
         path: "create", // /admin/create → formulaire
         component: CreateArticle,
         meta: { requiresAuth: true },
       },
       {
+        name: "UpdateArticle",
         path: "update/:id", // /admin/create → formulaire
         component: UpdateArticle,
         meta: { requiresAuth: true },
@@ -40,7 +43,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
-router.beforeEach(async (to, from, next) => {
+router.beforeEach(async (to, _from, next) => {
   const { data } = await supabase.auth.getUser();
   const user = data.user;
 
