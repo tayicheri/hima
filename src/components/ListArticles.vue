@@ -85,7 +85,7 @@ async function uploadMedia(articleId, event) {
 }
 
 // Supprimer un article
-async function deleteArticle(id) {
+async function deleteArticle(id, image_url) {
   if (!confirm("Supprimer cet article et ses médias ?")) return;
   const { error } = await supabase.from("articles").delete().eq("id", id);
   if (error) alert(error.message);
@@ -126,7 +126,7 @@ async function togglePublie(article) {
           Modifier
         </button>
         <button
-          @click="deleteArticle(a.id)"
+          @click="deleteArticle(a.id, a.image_url)"
           class="bg-red-500 text-white px-2 py-1"
         >
           Supprimer
