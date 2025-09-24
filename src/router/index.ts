@@ -6,12 +6,18 @@ import ListArticles from "@/components/ListArticles.vue";
 import CreateArticle from "@/components/CreateArticle.vue";
 import supabase from "@/lib/supabaseClient";
 import UpdateArticle from "@/components/UpdateArticle.vue";
+import Article from "@/views/Article.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+  },
+  {
+    path: "/articles/:categorie/:titre",
+    name: "Article",
+    component: Article,
   },
   {
     path: "/lekeza",

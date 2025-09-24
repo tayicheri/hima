@@ -2,9 +2,11 @@
 import ActionsSection from "@/components/ActionsSection.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import DonationSection from "@/components/DonationSection.vue";
+import AboutUs from "./AboutUs.vue";
 </script>
 <template>
   <main class="flex-grow flex flex-col gap-7">
+    <AboutUs />
     <ActionsSection />
     <ContactForm />
     <DonationSection />

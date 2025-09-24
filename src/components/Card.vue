@@ -9,7 +9,7 @@
       class="w-full h-40 object-cover rounded-t-lg mb-4"
     />
     <h3 class="text-xl font-bold text-gray-800">{{ title }}</h3>
-    <p class="text-gray-600 mb-4">{{ description }}</p>
+    <p class="text-gray-600 mb-4 line-clamp-4" v-html="content"></p>
     <a :href="link" class="text-blue-500 hover:text-blue-700"
       >En savoir plus &rarr;</a
     >
@@ -22,7 +22,7 @@ defineProps({
     type: String,
     required: true,
   },
-  description: {
+  content: {
     type: String,
     required: true,
   },

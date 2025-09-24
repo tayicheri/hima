@@ -2,7 +2,7 @@
   <section id="actions" class="bg-gray-100 py-16">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">
-        Nos Objectifs
+        Impact & Engagement
       </h2>
 
       <div class="relative">
@@ -28,7 +28,7 @@
             v-for="article in articles"
             :key="article.id"
             :title="article.title"
-            :description="article.description"
+            :content="article.content"
             :image_url="article.image_url"
             :link="article.link"
           />
@@ -80,7 +80,7 @@ const fetchProjects = async () => {
   articles.value =
     data?.map((a) => ({
       ...a,
-      link: `/articles/${slugify(a.categorie)}/${slugify(a.title)}`,
+      link: `/articles/${slugify(a.categorie)}/${slugify(a.title)}-${a.id}`,
     })) || [];
 };
 // 🔠 Fonction pour slugifier une chaîne

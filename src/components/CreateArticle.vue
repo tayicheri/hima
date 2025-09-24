@@ -45,7 +45,9 @@
 
       <!-- Image principale -->
       <div>
-        <label class="block text-sm font-medium mb-1">Image principale</label>
+        <label class="block text-sm font-medium mb-1"
+          >Image principale (1200 × 256,4.7:1)</label
+        >
         <input
           type="file"
           accept="image/*"

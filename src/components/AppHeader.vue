@@ -15,10 +15,11 @@
       <!-- Navigation -->
       <div class="">
         <nav class="mb-8 flex flex-wrap items-center justify-center gap-4">
-          <a href="#accueil" class="text-lg mx-4 hover:text-blue-400"
-            >Accueil</a
-          >
-          <a href="#actions" class="text-lg mx-4 hover:text-blue-400"
+          <a href="/" class="text-lg mx-4 hover:text-blue-400">Accueil</a>
+          <a
+            v-if="isHomePage"
+            href="#actions"
+            class="text-lg mx-4 hover:text-blue-400"
             >Projets</a
           >
           <a href="#contact" class="text-lg mx-4 hover:text-blue-400"
@@ -37,6 +38,10 @@
 </template>
 <script setup lang="ts">
 import ChevronScroll from "@/components/ChevronScroll.vue";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+const isHomePage = computed(() => route.path === "/");
 </script>
 
 <style scoped></style>
