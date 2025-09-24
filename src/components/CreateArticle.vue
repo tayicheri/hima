@@ -123,7 +123,7 @@ async function createArticle() {
 
     // Obtenir l'URL publique
     const { data: publicData } = supabase.storage
-      .from("articles-images")
+      .from("hima_medias")
       .getPublicUrl(fileName);
     imageUrl = publicData.publicUrl;
   }

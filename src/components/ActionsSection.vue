@@ -25,12 +25,12 @@
           @scroll="handleScroll"
         >
           <Card
-            v-for="(project, index) in projects"
-            :key="index"
-            :title="project.title"
-            :description="project.description"
-            :imageSrc="project.imageSrc"
-            :link="project.link"
+            v-for="article in articles"
+            :key="article.id"
+            :title="article.title"
+            :description="article.description"
+            :image_url="article.image_url"
+            :link="article.link"
           />
         </div>
       </div>
@@ -41,6 +41,7 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from "vue";
 import Card from "@/components/Card.vue";
+import supabase from "@/lib/supabaseClient";
 
 const scrollContainer = ref<HTMLElement | null>(null);
 const canScrollLeft = ref(false);
@@ -63,61 +64,43 @@ onMounted(() => {
     handleScroll();
   });
 });
-const projects = ref([
-  {
-    title: "Projet 1",
-    description: "Description du projet, ses objectifs, son impact.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-  {
-    title: "Projet 2",
-    description: "Un autre projet de l'association avec une brève description.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-  {
-    title: "Projet 3",
-    description: "Description d'un autre projet phare de l'association.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-  {
-    title: "Projet 4",
-    description:
-      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-  {
-    title: "Projet 4",
-    description:
-      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-  {
-    title: "Projet 4",
-    description:
-      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-  {
-    title: "Projet 4",
-    description:
-      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-  {
-    title: "Projet 4",
-    description:
-      "Ajoutez ici un autre projet que vous souhaitez mettre en avant.",
-    imageSrc: "https://via.placeholder.com/400x300",
-    link: "#",
-  },
-]);
+const articles = ref<any[]>([]);
+// 🔥 Récupération depuis Supabase
+const fetchProjects = async () => {
+  const { data, error } = await supabase
+    .from("articles")
+    .select("id, title,categorie, content, image_url")
+    .eq("publie", true) // ✅ par ex : seulement les publiés
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error("Erreur fetch articles:", error.message);
+    return;
+  }
+  articles.value =
+    data?.map((a) => ({
+      ...a,
+      link: `/articles/${slugify(a.categorie)}/${slugify(a.title)}`,
+    })) || [];
+};
+// 🔠 Fonction pour slugifier une chaîne
+function slugify(str: string) {
+  return str
+    .toString()
+    .normalize("NFD") // enlever les accents
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-") // remplacer tout ce qui n'est pas alphanum par "-"
+    .replace(/^-+|-+$/g, ""); // enlever les "-" en début/fin
+}
+
+onMounted(async () => {
+  await fetchProjects();
+  nextTick(() => {
+    handleScroll();
+  });
+});
 </script>
 
 <style scoped>
