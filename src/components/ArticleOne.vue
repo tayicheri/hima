@@ -15,6 +15,7 @@
           class="w-full h-72 object-cover rounded-lg mb-6"
         />
         <div class="prose max-w-none" v-html="article.content"></div>
+        <ListPhoto :article_id="article.id" class="mt-8" />
       </div>
       <div v-else class="text-center text-red-500">Article introuvable</div>
     </div>
@@ -24,6 +25,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
+import ListPhoto from "@/components/ListPhoto.vue";
 import supabase from "@/lib/supabaseClient";
 
 interface Article {
