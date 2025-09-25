@@ -6,6 +6,6 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 
 # docker
 
-docker-compose up vue-dev → mode développement.
+docker compose up vue-dev → mode développement.
 
-docker-compose up vue-prod → mode production.
+docker compose up -d vue-prod caddy → mode production.

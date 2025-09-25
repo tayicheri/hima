@@ -1,5 +1,5 @@
 # Étape 1 : build
-FROM node:20-alpine AS build
+FROM node:20-alpine 
 WORKDIR /app
 
 COPY package*.json ./
