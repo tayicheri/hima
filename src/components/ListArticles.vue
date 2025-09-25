@@ -151,7 +151,7 @@ async function togglePublie(article) {
       <input type="file" @change="uploadMedia(a.id, $event)" />
 
       <!-- Liste médias -->
-      <div class="mt-2 grid grid-cols-3 gap-2">
+      <div class="mt-2 flex space-x-2 overflow-x-auto">
         <div v-for="m in medias[a.id]" :key="m.id" class="border p-2">
           <img
             v-if="m.type === 'image'"
