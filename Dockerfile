@@ -1,29 +1,30 @@
-# Étape 1 : build
+# Étape 1 : Build
 FROM node:20-alpine AS build
 WORKDIR /app
 
-# Copier uniquement les fichiers nécessaires pour installer les deps
+# Copier les manifests
 COPY package*.json ./
+
+# Installer toutes les dépendances (y compris dev)
 RUN npm install --frozen-lockfile --include=dev
 
 # Copier le reste du code
 COPY . .
 
-# Construire l'app Vue
+# Compiler l’app (vue-tsc sera dispo)
 RUN npm run build
 
-# Étape 2 : Nginx pour servir l'app
+# Étape 2 : Nginx pour servir l’app
 FROM nginx:stable-alpine
 
-# Nettoyer l'ancienne page d'accueil par défaut
+# Supprimer le contenu par défaut
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copier le build généré depuis l'étape 1
+# Copier uniquement le build final
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Config spéciale SPA (routes Vue.js)
+# Config SPA (important pour Vue Router en mode history)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
-
 CMD ["nginx", "-g", "daemon off;"]
