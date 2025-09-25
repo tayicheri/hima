@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copier uniquement les fichiers nécessaires pour installer les deps
 COPY package*.json ./
-RUN npm install --frozen-lockfile
+RUN npm install --frozen-lockfile --include=dev
 
 # Copier le reste du code
 COPY . .
