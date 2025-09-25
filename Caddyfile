@@ -1,0 +1,4 @@
+hima-narihimepvoidzima.fr, www.hima-narihimepvoidzima.fr {
+    reverse_proxy vue-prod:80
+    tls himapvoidzima@gmail.com
+}

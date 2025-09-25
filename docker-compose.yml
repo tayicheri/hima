@@ -14,5 +14,26 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    expose:
+      - "80" # Expose le port interne sans le mapper directement sur l'hôte
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy-prod
+    depends_on:
+      - vue-prod
     ports:
-      - "8080:80"
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - ACME_AGREE=true
+      - ACME_EMAIL=himapvoidzima@gmail.com
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:
