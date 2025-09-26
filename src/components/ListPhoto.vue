@@ -8,10 +8,14 @@
         :key="index"
         class="flex-none w-56 h-56 rounded-xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300"
       >
-        <img
+        <!-- <img
           :src="photo.url"
           :alt="photo.alt_text || `Photo ${index + 1}`"
           class="w-full h-full object-cover"
+        /> -->
+        <FullScreenPhoto
+          :src="photo.url"
+          :alt="photo.alt_text || `Photo ${index + 1}`"
         />
       </div>
     </div>
@@ -21,6 +25,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import supabase from "@/lib/supabaseClient";
+import FullScreenPhoto from "./FullScreenPhoto.vue";
 
 // Props
 const { article_id } = defineProps({

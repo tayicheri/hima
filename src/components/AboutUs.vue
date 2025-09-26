@@ -39,11 +39,15 @@
           :key="index"
           class="flex-none w-56 h-56 rounded-xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300"
         >
-          <img
+          <FullScreenPhoto
+            :src="photo.url"
+            :alt="photo.alt_text || `Photo ${index + 1}`"
+          />
+          <!-- <img
             :src="photo.url"
             :alt="photo.alt_text || `Photo ${index + 1}`"
             class="w-full h-full object-cover"
-          />
+          /> -->
         </div>
       </div>
     </div>
@@ -52,10 +56,11 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+import FullScreenPhoto from "./FullScreenPhoto.vue";
 
 const photos = ref([
   {
-    url: new URL("@/assets/about-us/about1.jpeg", import.meta.url).href,
+    url: new URL("@/assets/about-us/about1.png", import.meta.url).href,
     alt_text: "Photo 1",
   },
   {
