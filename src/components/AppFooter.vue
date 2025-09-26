@@ -36,19 +36,19 @@
         <!-- Réseaux sociaux -->
         <div class="flex justify-center md:justify-end space-x-4">
           <a
-            href="https://facebook.com"
+            href="https://www.facebook.com/share/1N3ViBEFC1/"
             target="_blank"
             class="text-gray-400 hover:text-white"
           >
             <i class="fab fa-facebook-square text-2xl"></i>
           </a>
-          <a
+          <!-- <a
             href="https://twitter.com"
             target="_blank"
             class="text-gray-400 hover:text-white"
           >
             <i class="fab fa-twitter text-2xl"></i>
-          </a>
+          </a> -->
           <a
             href="https://www.instagram.com/hima_association?igsh=czhmMnUwN3RyMnVo"
             target="_blank"

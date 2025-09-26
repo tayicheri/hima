@@ -1,7 +1,11 @@
 <!-- components/Card.vue -->
 <template>
   <div
-    class="bg-white p-6 rounded-l-[30px] shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0"
+    role="link"
+    tabindex="0"
+    @click="() => navigateTo(link)"
+    @keydown.enter="() => navigateTo(link)"
+    class="bg-white p-6 cursor-pointer rounded-l-[30px] shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0"
   >
     <img
       :src="image_url"
@@ -35,6 +39,10 @@ defineProps({
     required: true,
   },
 });
+
+const navigateTo = (url: string) => {
+  window.location.href = url;
+};
 </script>
 
 <style scoped>

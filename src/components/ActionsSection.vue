@@ -2,7 +2,7 @@
   <section id="actions" class="bg-gray-100 py-16">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">
-        Impact & Engagement
+        Decouvrez nos Actions
       </h2>
 
       <div class="relative">

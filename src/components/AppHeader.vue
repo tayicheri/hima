@@ -20,7 +20,7 @@
             v-if="isHomePage"
             href="#actions"
             class="text-lg mx-4 hover:text-blue-400"
-            >Projets</a
+            >Nos Actions</a
           >
           <a href="#contact" class="text-lg mx-4 hover:text-blue-400"
             >Contact</a

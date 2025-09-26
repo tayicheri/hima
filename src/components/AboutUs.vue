@@ -32,10 +32,41 @@
         </ul>
       </div>
     </div>
+    <div class="w-full flex px-4 justify-center">
+      <div class="flex space-x-4 overflow-x-auto py-2 scrollbar-hide">
+        <div
+          v-for="(photo, index) in photos"
+          :key="index"
+          class="flex-none w-56 h-56 rounded-xl overflow-hidden shadow-lg hover:scale-105 transform transition duration-300"
+        >
+          <img
+            :src="photo.url"
+            :alt="photo.alt_text || `Photo ${index + 1}`"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
+import { ref } from "vue";
+
+const photos = ref([
+  {
+    url: new URL("@/assets/about-us/about1.jpeg", import.meta.url).href,
+    alt_text: "Photo 1",
+  },
+  {
+    url: new URL("@/assets/about-us/about2.png", import.meta.url).href,
+    alt_text: "Photo 2",
+  },
+  {
+    url: new URL("@/assets/about-us/about3.png", import.meta.url).href,
+    alt_text: "Photo 3",
+  },
+]);
 // Aucun script particulier nécessaire ici, le contenu est statique
 </script>
 
