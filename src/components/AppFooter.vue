@@ -36,21 +36,21 @@
         <!-- Réseaux sociaux -->
         <div class="flex justify-center md:justify-end space-x-4">
           <a
-            href="https://www.facebook.com/share/1N3ViBEFC1/"
+            :href="SOCIALS.facebook"
             target="_blank"
             class="text-gray-400 hover:text-white"
           >
             <i class="fab fa-facebook-square text-2xl"></i>
           </a>
-          <!-- <a
-            href="https://twitter.com"
+          <a
+            :href="SOCIALS.tiktok"
             target="_blank"
             class="text-gray-400 hover:text-white"
           >
-            <i class="fab fa-twitter text-2xl"></i>
-          </a> -->
+            <i class="fab fa-tiktok text-2xl"></i>
+          </a>
           <a
-            href="https://www.instagram.com/hima_association?igsh=czhmMnUwN3RyMnVo"
+            :href="SOCIALS.instagram"
             target="_blank"
             class="text-gray-400 hover:text-white"
           >
@@ -62,9 +62,11 @@
   </footer>
 </template>
 
-<script>
-export default {
-  name: "AppFooter",
+<script setup>
+const SOCIALS = {
+  facebook: import.meta.env.VITE_FACEBOOK_URL,
+  tiktok: import.meta.env.VITE_TIKTOK_URL,
+  instagram: import.meta.env.VITE_INSTAGRAM_URL,
 };
 </script>
 
