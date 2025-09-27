@@ -15,7 +15,8 @@ const supabase = createClient(
 async function getArticleSlugs() {
   const { data, error } = await supabase
     .from("articles") // nom de ta table
-    .select("categorie,id,title"); // champ contenant le slug
+    .select("categorie,id,title")
+    .eq("type", "article"); // champ contenant le slug
   if (error) {
     console.error("Erreur Supabase:", error);
     return [];

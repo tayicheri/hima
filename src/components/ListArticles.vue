@@ -1,6 +1,5 @@
 <script setup>
-import { ref } from "vue";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import supabase from "@/lib/supabaseClient";
 import Spinner from "@/components/Spinner.vue";
 
@@ -9,6 +8,11 @@ const articles = ref([]);
 const medias = ref({}); // dictionnaire { articleId: [liste médias] }
 const searchTerm = ref("");
 
+// Pagination
+const page = ref(1);
+const pageSize = 10;
+const totalCount = ref(0);
+
 onMounted(async () => {
   console.log("Fetching articles...");
   fetchArticles();
@@ -16,13 +20,27 @@ onMounted(async () => {
 
 async function fetchArticles() {
   isLoading.value = true;
+
+  // Compter le total d’articles
+  const { count } = await supabase
+    .from("articles")
+    .select("*", { count: "exact", head: true });
+
+  totalCount.value = count || 0;
+
+  const from = (page.value - 1) * pageSize;
+  const to = from + pageSize - 1;
+
   const { data: arts, error } = await supabase
     .from("articles")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(from, to);
+
   if (!error) {
     articles.value = arts;
     isLoading.value = false;
+    medias.value = {};
     // Charger les médias pour chaque article
     for (let a of arts) {
       const { data: m } = await supabase
@@ -31,6 +49,20 @@ async function fetchArticles() {
         .eq("article_id", a.id);
       medias.value[a.id] = m || [];
     }
+  }
+}
+
+function nextPage() {
+  if (page.value * pageSize < totalCount.value) {
+    page.value++;
+    fetchArticles();
+  }
+}
+
+function prevPage() {
+  if (page.value > 1) {
+    page.value--;
+    fetchArticles();
   }
 }
 
@@ -138,6 +170,7 @@ async function search(term) {
         @input="search($event.target.value)"
       />
     </div>
+
     <div v-for="a in articles" :key="a.id" class="border p-4 mb-4 rounded">
       <h3 class="font-bold text-lg">{{ a.title }}</h3>
 
@@ -203,6 +236,25 @@ async function search(term) {
           </button>
         </div>
       </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-center items-center space-x-4 mt-6">
+      <button
+        @click="prevPage"
+        :disabled="page === 1"
+        class="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+      >
+        ← Précédent
+      </button>
+      <span>Page {{ page }} / {{ Math.ceil(totalCount / pageSize) }}</span>
+      <button
+        @click="nextPage"
+        :disabled="page * pageSize >= totalCount"
+        class="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+      >
+        Suivant →
+      </button>
     </div>
   </div>
 </template>

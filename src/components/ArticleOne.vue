@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import ListPhoto from "@/components/ListPhoto.vue";
 import supabase from "@/lib/supabaseClient";
 
@@ -37,6 +37,7 @@ interface Article {
 }
 
 const route = useRoute();
+const router = useRouter();
 const article = ref<Article | null>(null);
 const loading = ref(true);
 
@@ -62,11 +63,13 @@ async function fetchArticle() {
     .from("articles")
     .select("*")
     .eq("id", id)
+    .eq("publie", true)
     .single();
 
   if (error) {
     console.error("Erreur Supabase:", error.message);
     loading.value = false;
+    router.push("/404"); // 👈 redirection vers ta page 404
     return;
   }
 
