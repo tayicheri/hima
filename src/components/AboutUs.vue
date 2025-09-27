@@ -55,23 +55,50 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import FullScreenPhoto from "./FullScreenPhoto.vue";
+import supabase from "@/lib/supabaseClient";
 
-const photos = ref([
-  {
-    url: new URL("@/assets/about-us/about1.png", import.meta.url).href,
-    alt_text: "Photo 1",
-  },
-  {
-    url: new URL("@/assets/about-us/about2.png", import.meta.url).href,
-    alt_text: "Photo 2",
-  },
-  {
-    url: new URL("@/assets/about-us/about3.png", import.meta.url).href,
-    alt_text: "Photo 3",
-  },
-]);
+interface Photo {
+  url: string;
+  alt_text?: string;
+  article_id: number;
+}
+const photos = ref<Photo[]>([]);
+
+onMounted(async () => {
+  try {
+    // 1️⃣ Récupérer les articles type "aboutus"
+    const { data: articles, error: articleError } = await supabase
+      .from("articles")
+      .select("id")
+      .eq("type", "aboutus");
+
+    if (articleError) throw articleError;
+    if (!articles || articles.length === 0) return;
+
+    const articleIds = articles.map((a: any) => a.id);
+
+    // 2️⃣ Récupérer les médias correspondants
+    const { data: medias, error: mediaError } = await supabase
+      .from("article_medias")
+      .select("url, alt_text, article_id")
+      .in("article_id", articleIds);
+
+    if (mediaError) throw mediaError;
+
+    // 3️⃣ Stocker dans photos
+    photos.value =
+      medias?.map((m: any) => ({
+        url: m.url, // si le champ est une URL publique déjà stockée
+        alt_text: m.alt_text,
+        article_id: m.article_id,
+      })) || [];
+  } catch (err) {
+    console.error("Erreur récupération des photos About Us:", err);
+  }
+});
+
 // Aucun script particulier nécessaire ici, le contenu est statique
 </script>
 

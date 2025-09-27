@@ -3,6 +3,8 @@
     <h2 class="text-2xl font-bold mb-6">Modifier l'article</h2>
     <Spinner v-if="loading" />
     <form @submit.prevent="updateArticle" v-else class="space-y-4">
+      <!-- type d'article -->
+      <InputCombobox v-model="type" />
       <!-- Titre -->
       <div>
         <label class="block text-sm font-medium mb-1">Titre</label>
@@ -87,6 +89,7 @@ import supabase from "@/lib/supabaseClient";
 import { useRoute } from "vue-router";
 import Spinner from "./Spinner.vue";
 import Editor from "@/Editor.vue";
+import InputCombobox from "./InputCombobox.vue";
 
 const route = useRoute();
 const articleId = ref<number | null>(null);
@@ -98,6 +101,7 @@ const categorie = ref("");
 const imageFile = ref<File | null>(null);
 const message = ref("");
 const errorMessage = ref("");
+const type = ref("");
 const loading = ref(true);
 const imagePreview = ref<string | null>(null);
 
@@ -125,6 +129,7 @@ onMounted(async () => {
   author.value = data.author;
   categorie.value = data.categorie;
   imagePreview.value = data.image_url;
+  type.value = data.type;
   loading.value = false;
 });
 
@@ -172,6 +177,7 @@ async function updateArticle() {
     content: content.value,
     author: author.value,
     categorie: categorie.value,
+    type: type.value,
   };
   if (imageUrl) updateData.image_url = imageUrl;
 

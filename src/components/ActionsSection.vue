@@ -1,5 +1,5 @@
 <template>
-  <section id="actions" class="bg-gray-100 py-16">
+  <section v-if="articles.length" id="actions" class="bg-gray-100 py-16">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl font-semibold text-center text-gray-800 mb-12">
         Decouvrez nos Actions
@@ -70,7 +70,8 @@ const fetchProjects = async () => {
   const { data, error } = await supabase
     .from("articles")
     .select("id, title,categorie, content, image_url")
-    .eq("publie", true) // ✅ par ex : seulement les publiés
+    .eq("publie", true)
+    .eq("type", "article")
     .order("id", { ascending: false });
 
   if (error) {

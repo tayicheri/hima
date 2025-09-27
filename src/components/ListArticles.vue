@@ -7,6 +7,7 @@ import Spinner from "@/components/Spinner.vue";
 const isLoading = ref(true);
 const articles = ref([]);
 const medias = ref({}); // dictionnaire { articleId: [liste médias] }
+const searchTerm = ref("");
 
 onMounted(async () => {
   console.log("Fetching articles...");
@@ -107,18 +108,44 @@ async function togglePublie(article) {
     article.publie = newStatus;
   }
 }
+
+async function search(term) {
+  searchTerm.value = term;
+
+  const { data, error } = await supabase
+    .from("articles")
+    .select("*")
+    .ilike("title", `%${term}%`); // insensible à la casse
+
+  if (error) {
+    console.error("Erreur recherche:", error);
+    return;
+  }
+
+  articles.value = data || [];
+}
 </script>
 
 <template>
   <spinner v-if="isLoading" />
 
   <div v-else>
+    <div class="mb-5">
+      <input
+        type="text"
+        placeholder="Rechercher par titre..."
+        class="border border-gray-300 rounded-md p-2 px-3 mr-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm w-full sm:w-64"
+        @input="search($event.target.value)"
+      />
+    </div>
     <div v-for="a in articles" :key="a.id" class="border p-4 mb-4 rounded">
       <h3 class="font-bold text-lg">{{ a.title }}</h3>
+
       <p class="mb-2 line-clamp-2">{{ a.content }}</p>
 
       <!-- Boutons article -->
       <div class="mb-3 flex flex-row space-x-4">
+        <p class="font-bold">type : {{ a.type }}</p>
         <button
           @click="$router.push('/lekeza/update/' + a.id)"
           class="bg-yellow-500 text-white px-2 py-1 mr-2"

@@ -3,6 +3,8 @@
     <h2 class="text-2xl font-bold mb-6">Créer un article</h2>
 
     <form @submit.prevent="createArticle" class="space-y-4">
+      <!-- type d'article -->
+      <InputCombobox v-model="type" />
       <!-- Titre -->
       <div>
         <label class="block text-sm font-medium mb-1">Titre</label>
@@ -85,6 +87,7 @@
 import { ref } from "vue";
 import supabase from "@/lib/supabaseClient";
 import Editor from "@/Editor.vue";
+import InputCombobox from "./InputCombobox.vue";
 
 const title = ref("");
 const content = ref("");
@@ -93,6 +96,7 @@ const imageFile = ref<File | null>(null);
 const message = ref("");
 const categorie = ref("");
 const errorMessage = ref("");
+const type = ref("");
 const imagePreview = ref<string | null>(null);
 
 // Gérer la sélection du fichier
@@ -136,7 +140,8 @@ async function createArticle() {
       content: content.value,
       author: author.value,
       categorie: categorie.value,
-      image_url: imageUrl, // Assure-toi que la colonne existe dans ta table
+      image_url: imageUrl,
+      type: type.value,
     },
   ]);
 
