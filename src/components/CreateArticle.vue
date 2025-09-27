@@ -28,6 +28,21 @@
         />
       </div>
 
+      <!-- Meta description -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Meta description</label>
+        <textarea
+          v-model="metaDescription"
+          rows="3"
+          maxlength="155"
+          class="w-full p-2 border rounded-md"
+          placeholder="Ajouter une meta description pour l'article..."
+        ></textarea>
+        <p class="text-xs text-gray-500 mt-1">
+          {{ metaDescription.length }}/155 caractères
+        </p>
+      </div>
+
       <!-- Contenu avec CKEditor -->
       <div>
         <label class="block text-sm font-medium mb-1">Contenu</label>
@@ -96,6 +111,7 @@ const imageFile = ref<File | null>(null);
 const message = ref("");
 const categorie = ref("");
 const errorMessage = ref("");
+const metaDescription = ref("");
 const type = ref("");
 const imagePreview = ref<string | null>(null);
 
@@ -142,6 +158,7 @@ async function createArticle() {
       categorie: categorie.value,
       image_url: imageUrl,
       type: type.value,
+      meta_description: metaDescription.value,
     },
   ]);
 

@@ -28,6 +28,20 @@
           placeholder="Catégorie de l'article"
         />
       </div>
+      <!-- Meta description -->
+      <div>
+        <label class="block text-sm font-medium mb-1">Meta description</label>
+        <textarea
+          v-model="metaDescription"
+          rows="3"
+          maxlength="155"
+          class="w-full p-2 border rounded-md"
+          placeholder="Ajouter une meta description pour l'article..."
+        ></textarea>
+        <p class="text-xs text-gray-500 mt-1">
+          {{ metaDescription.length }}/155 caractères
+        </p>
+      </div>
 
       <!-- Contenu avec CKEditor -->
       <div>
@@ -101,6 +115,7 @@ const categorie = ref("");
 const imageFile = ref<File | null>(null);
 const message = ref("");
 const errorMessage = ref("");
+const metaDescription = ref("");
 const type = ref("");
 const loading = ref(true);
 const imagePreview = ref<string | null>(null);
@@ -130,6 +145,7 @@ onMounted(async () => {
   categorie.value = data.categorie;
   imagePreview.value = data.image_url;
   type.value = data.type;
+  metaDescription.value = data.meta_description;
   loading.value = false;
 });
 
@@ -178,6 +194,7 @@ async function updateArticle() {
     author: author.value,
     categorie: categorie.value,
     type: type.value,
+    meta_description: metaDescription.value,
   };
   if (imageUrl) updateData.image_url = imageUrl;
 
