@@ -2,6 +2,7 @@
 import { ref, onMounted } from "vue";
 import supabase from "@/lib/supabaseClient";
 import Spinner from "@/components/Spinner.vue";
+import AdminStats from "@/components/AdminStats.vue";
 
 const isLoading = ref(true);
 const articles = ref([]);
@@ -170,6 +171,7 @@ async function search(term) {
         @input="search($event.target.value)"
       />
     </div>
+    <AdminStats />
 
     <div v-for="a in articles" :key="a.id" class="border p-4 mb-4 rounded">
       <h3 class="font-bold text-lg">{{ a.title }}</h3>
