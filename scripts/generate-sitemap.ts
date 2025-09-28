@@ -6,10 +6,10 @@ import { createClient } from "@supabase/supabase-js";
 import "dotenv/config";
 
 // Initialise Supabase
-const supabase = createClient(
-  process.env.VITE_SUPABASE_URL,
-  process.env.VITE_SUPABASE_PUBLISHABLE_KEY
-);
+const supabaseUrl = process.env.VITE_SUPABASE_URL ?? "";
+const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "";
+
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Fonction pour récupérer les slugs des articles
 async function getArticleSlugs() {
