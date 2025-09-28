@@ -32,7 +32,7 @@ async function generateSitemap() {
     hostname: "https://hima-narihimepvoidzima.fr",
   });
 
-  const path = resolve("./public/sitemap.xml");
+  const path = resolve("./dist/sitemap.xml");
   const writeStream = createWriteStream(path);
   sitemap.pipe(writeStream);
 
