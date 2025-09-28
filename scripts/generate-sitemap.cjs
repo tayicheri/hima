@@ -1,26 +1,27 @@
-import { SitemapStream, streamToPromise } from "sitemap";
-import { createWriteStream } from "fs";
-import { resolve } from "path";
-import { createClient } from "@supabase/supabase-js";
-
-import "dotenv/config";
+// scripts/generate-sitemap.ts
+const { SitemapStream, streamToPromise } = require("sitemap");
+const { createWriteStream } = require("fs");
+const { resolve } = require("path");
+const { createClient } = require("@supabase/supabase-js");
+require("dotenv").config();
 
 // Initialise Supabase
 const supabaseUrl = process.env.VITE_SUPABASE_URL ?? "";
 const supabaseKey = process.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "";
-
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Fonction pour récupérer les slugs des articles
 async function getArticleSlugs() {
   const { data, error } = await supabase
-    .from("articles") // nom de ta table
+    .from("articles")
     .select("categorie,id,title")
-    .eq("type", "article"); // champ contenant le slug
+    .eq("type", "article");
+
   if (error) {
     console.error("Erreur Supabase:", error);
     return [];
   }
+
   return data.map(
     (article) => `${article.categorie}/${article.title}-${article.id}`
   );
@@ -30,16 +31,17 @@ async function generateSitemap() {
   const sitemap = new SitemapStream({
     hostname: "https://hima-narihimepvoidzima.fr",
   });
-  const path = resolve("./dist/sitemap.xml");
+
+  const path = resolve("./public/sitemap.xml");
   const writeStream = createWriteStream(path);
   sitemap.pipe(writeStream);
 
   const routes = [
     { path: "/" },
-
     { path: "/articles/:categorie/:title" },
-    // autres routes...
+    // autres routes si besoin
   ];
+
   const articleSlugs = await getArticleSlugs();
 
   routes.forEach((route) => {
@@ -62,9 +64,11 @@ async function generateSitemap() {
 
   sitemap.end();
   await streamToPromise(sitemap);
+
   console.log(
     "✅ Sitemap généré avec routes classiques et articles Supabase !"
   );
 }
 
+// Exécution
 generateSitemap().catch(console.error);
