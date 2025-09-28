@@ -38,15 +38,14 @@ watch(localValue, (newVal) => {
 });
 
 // CKEditor Cloud setup
-const LICENSE_KEY =
-  "eyJhbGciOiJFUzI1NiJ9.eyJleHAiOjE3NTk4ODE1OTksImp0aSI6ImNiOWU0Mzc3LWM0OTktNDFkZi04YWNiLWEyZDM2YzZiNjdlMyIsInVzYWdlRW5kcG9pbnQiOiJodHRwczovL3Byb3h5LWV2ZW50LmNrZWRpdG9yLmNvbSIsImRpc3RyaWJ1dGlvbkNoYW5uZWwiOlsiY2xvdWQiLCJkcnVwYWwiLCJzaCJdLCJ3aGl0ZUxhYmVsIjp0cnVlLCJsaWNlbnNlVHlwZSI6InRyaWFsIiwiZmVhdHVyZXMiOlsiKiJdLCJ2YyI6IjJiOTg2ZWQxIn0.nTFywyLO28s3OANWs--5p7RcXMTbRN-l8TLeQtEbvyn8s-iskobDz360bDa-ozdzg--mQGMomH-bXIY1AdAZKA";
-const CLOUD_SERVICES_TOKEN_URL =
-  "https://p2fa_q4pdcqp.cke-cs.com/token/dev/d71700e5a0bed7615268c8378c4b45c591ca142c352e03f409850a82c534?limit=10";
+const LICENSE_KEY = import.meta.env.VITE_CKEDITOR_LICENSE_KEY;
+const CLOUD_SERVICES_TOKEN_URL = import.meta.env
+  .VITE_CKEDITOR_CLOUD_SERVICES_TOKEN_URL;
 
 const cloud = useCKEditorCloud({
   version: "46.1.1",
   translations: ["fr"],
-  ckbox: { version: "2.6.1" },
+  premium: false,
 });
 
 const isLayoutReady = ref(false);
@@ -110,39 +109,47 @@ const config = computed(() => {
 
   const {
     Alignment,
+    Autoformat,
     AutoImage,
-    AutoLink,
     Autosave,
     BlockQuote,
     Bold,
-    // CKBox,
-    // CloudServices,
-    CodeBlock,
+    CloudServices,
+    Emoji,
     Essentials,
+    FindAndReplace,
+    Fullscreen,
     GeneralHtmlSupport,
     Heading,
     HorizontalLine,
+    HtmlEmbed,
     ImageBlock,
-    ImageEditing,
+    ImageCaption,
     ImageInline,
-    ImageInsert,
     ImageInsertViaUrl,
     ImageResize,
     ImageStyle,
     ImageTextAlternative,
     ImageToolbar,
     ImageUpload,
-    ImageUtils,
     Indent,
     IndentBlock,
     Italic,
     Link,
+    LinkImage,
     List,
     ListProperties,
-    TodoList,
-    LinkImage,
+    MediaEmbed,
+    Mention,
     Paragraph,
-    PictureEditing,
+    PasteFromOffice,
+    SpecialCharacters,
+    SpecialCharactersArrows,
+    SpecialCharactersCurrency,
+    SpecialCharactersEssentials,
+    SpecialCharactersLatin,
+    SpecialCharactersMathematical,
+    SpecialCharactersText,
     Style,
     Table,
     TableCaption,
@@ -150,6 +157,8 @@ const config = computed(() => {
     TableColumnResize,
     TableProperties,
     TableToolbar,
+    TextTransformation,
+    TodoList,
     Underline,
   } = cloud.data.value.CKEditor;
 
@@ -159,6 +168,9 @@ const config = computed(() => {
         "undo",
         "redo",
         "|",
+        "findAndReplace",
+        "fullscreen",
+        "|",
         "heading",
         "style",
         "|",
@@ -166,49 +178,50 @@ const config = computed(() => {
         "italic",
         "underline",
         "|",
+        "emoji",
+        "specialCharacters",
         "horizontalLine",
         "link",
-        "insertImage",
-        "ckbox",
+        "mediaEmbed",
         "insertTable",
         "blockQuote",
-        "codeBlock",
+        "htmlEmbed",
         "|",
         "alignment",
         "|",
-        "outdent",
-        "indent",
         "bulletedList",
         "numberedList",
         "todoList",
+        "outdent",
+        "indent",
       ],
       shouldNotGroupWhenFull: false,
     },
     plugins: [
       Alignment,
+      Autoformat,
       AutoImage,
-      AutoLink,
       Autosave,
       BlockQuote,
       Bold,
-      // CKBox,
-      // CloudServices,
-      CodeBlock,
+      CloudServices,
+      Emoji,
       Essentials,
+      FindAndReplace,
+      Fullscreen,
       GeneralHtmlSupport,
       Heading,
       HorizontalLine,
+      HtmlEmbed,
       ImageBlock,
-      ImageEditing,
+      ImageCaption,
       ImageInline,
-      ImageInsert,
       ImageInsertViaUrl,
       ImageResize,
       ImageStyle,
       ImageTextAlternative,
       ImageToolbar,
       ImageUpload,
-      ImageUtils,
       Indent,
       IndentBlock,
       Italic,
@@ -216,9 +229,17 @@ const config = computed(() => {
       LinkImage,
       List,
       ListProperties,
-      TodoList,
+      MediaEmbed,
+      Mention,
       Paragraph,
-      PictureEditing,
+      PasteFromOffice,
+      SpecialCharacters,
+      SpecialCharactersArrows,
+      SpecialCharactersCurrency,
+      SpecialCharactersEssentials,
+      SpecialCharactersLatin,
+      SpecialCharactersMathematical,
+      SpecialCharactersText,
       Style,
       Table,
       TableCaption,
@@ -226,12 +247,22 @@ const config = computed(() => {
       TableColumnResize,
       TableProperties,
       TableToolbar,
+      TextTransformation,
+      TodoList,
       Underline,
     ],
     extraPlugins: [SupabaseUploadAdapterPlugin],
-    cloudServices: {
-      tokenUrl: CLOUD_SERVICES_TOKEN_URL,
+    fullscreen: {
+      onEnterCallback: (container) =>
+        container.classList.add(
+          "editor-container",
+          "editor-container_classic-editor",
+          "editor-container_include-style",
+          "editor-container_include-fullscreen",
+          "main-container"
+        ),
     },
+
     heading: {
       options: [
         {
@@ -289,6 +320,7 @@ const config = computed(() => {
     },
     image: {
       toolbar: [
+        "toggleImageCaption",
         "imageTextAlternative",
         "|",
         "imageStyle:inline",
@@ -302,6 +334,7 @@ const config = computed(() => {
       '<h2>Congratulations on setting up CKEditor 5! 🎉</h2>\n<p>\n\tYou\'ve successfully created a CKEditor 5 project. This powerful text editor\n\twill enhance your application, enabling rich text editing capabilities that\n\tare customizable and easy to use.\n</p>\n<h3>What\'s next?</h3>\n<ol>\n\t<li>\n\t\t<strong>Integrate into your app</strong>: time to bring the editing into\n\t\tyour application. Take the code you created and add to your application.\n\t</li>\n\t<li>\n\t\t<strong>Explore features:</strong> Experiment with different plugins and\n\t\ttoolbar options to discover what works best for your needs.\n\t</li>\n\t<li>\n\t\t<strong>Customize your editor:</strong> Tailor the editor\'s\n\t\tconfiguration to match your application\'s style and requirements. Or\n\t\teven write your plugin!\n\t</li>\n</ol>\n<p>\n\tKeep experimenting, and don\'t hesitate to push the boundaries of what you\n\tcan achieve with CKEditor 5. Your feedback is invaluable to us as we strive\n\tto improve and evolve. Happy editing!\n</p>\n<h3>Helpful resources</h3>\n<ul>\n\t<li>📝 <a href="https://portal.ckeditor.com/checkout?plan=free">Trial sign up</a>,</li>\n\t<li>📕 <a href="https://ckeditor.com/docs/ckeditor5/latest/installation/index.html">Documentation</a>,</li>\n\t<li>⭐️ <a href="https://github.com/ckeditor/ckeditor5">GitHub</a> (star us if you can!),</li>\n\t<li>🏠 <a href="https://ckeditor.com">CKEditor Homepage</a>,</li>\n\t<li>🧑‍💻 <a href="https://ckeditor.com/ckeditor-5/demo/">CKEditor 5 Demos</a>,</li>\n</ul>\n<h3>Need help?</h3>\n<p>\n\tSee this text, but the editor is not starting up? Check the browser\'s\n\tconsole for clues and guidance. It may be related to an incorrect license\n\tkey if you use premium features or another feature-related requirement. If\n\tyou cannot make it work, file a GitHub issue, and we will help as soon as\n\tpossible!\n</p>\n',
     language: "fr",
     licenseKey: LICENSE_KEY,
+
     link: {
       addTargetToExternalLinks: true,
       defaultProtocol: "https://",
@@ -314,6 +347,23 @@ const config = computed(() => {
           },
         },
       },
+    },
+    list: {
+      properties: {
+        styles: true,
+        startIndex: true,
+        reversed: true,
+      },
+    },
+    mention: {
+      feeds: [
+        {
+          marker: "@",
+          feed: [
+            /* See: https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html */
+          ],
+        },
+      ],
     },
     placeholder: "Type or paste your content here!",
     style: {
