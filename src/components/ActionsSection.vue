@@ -26,7 +26,7 @@
               des différentes îles de l'archipel.
             </p>
             <a
-              href="#"
+              href="/articles/action/lassociation-hima-un-geste-de-solidarit-au-service-des-plus-dmunis-14"
               class="inline-block text-green-600 font-semibold hover:underline"
             >
               En savoir plus →
@@ -52,7 +52,7 @@
               potentiel de la jeunesse comorienne.
             </p>
             <a
-              href="#"
+              href="/articles/action/cours-de-soutien-avec-lassociation-hima-russir-ensemble--12"
               class="inline-block text-green-600 font-semibold hover:underline"
             >
               En savoir plus →
@@ -80,7 +80,7 @@
               pour un développement durable.
             </p>
             <a
-              href="#"
+              href="/articles/action/prserver-lenvironnement-aux-comores-un-enjeu-vital-pour-lavenir-15"
               class="inline-block text-green-600 font-semibold hover:underline"
             >
               En savoir plus →
