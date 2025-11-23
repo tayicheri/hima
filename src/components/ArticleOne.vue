@@ -56,6 +56,7 @@ async function fetchArticle() {
   const id = extractIdFromSlug(slug);
   if (!id) {
     loading.value = false;
+    router.push("/404");
     return;
   }
 
@@ -68,6 +69,13 @@ async function fetchArticle() {
 
   if (error) {
     console.error("Erreur Supabase:", error.message);
+    loading.value = false;
+    router.push("/404"); // 👈 redirection vers ta page 404
+    return;
+  }
+  console.log(data);
+
+  if (!data) {
     loading.value = false;
     router.push("/404"); // 👈 redirection vers ta page 404
     return;
