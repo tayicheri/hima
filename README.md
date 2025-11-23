@@ -11,3 +11,5 @@ docker compose up vue-dev → mode développement.
 docker compose up -d vue-prod caddy → mode production.
 
 vider docker system prune -a --volumes
+
+npm run build
