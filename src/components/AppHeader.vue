@@ -22,6 +22,9 @@
             class="text-lg mx-4 hover:text-blue-400"
             >Nos Actions</a
           >
+          <a href="/articles" class="text-lg mx-4 hover:text-blue-400"
+            >Activités</a
+          >
           <a href="#contact" class="text-lg mx-4 hover:text-blue-400"
             >Contact</a
           >

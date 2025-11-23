@@ -66,17 +66,21 @@ const searchByCategorie = async (
     pagination.value.page = 1; // reset page
   }
 
-  // 1️⃣ récupérer les articles filtrés
-  const { data, error, count } = await supabase
+  let query = supabase
     .from("articles")
-    .select("id, title, content,categorie, image_url", { count: "exact" })
+    .select("id, title, content, categorie, image_url", { count: "exact" })
     .eq("publie", true)
-    .eq("type", "article")
-    .eq("categorie", categorie)
-    .range(
-      (pagination.value.page - 1) * pagination.value.pageSize,
-      pagination.value.page * pagination.value.pageSize - 1
-    );
+    .eq("type", "article");
+
+  if (categorie !== "all") {
+    query = query.eq("categorie", categorie);
+  }
+
+  // Pagination
+  const from = (pagination.value.page - 1) * pagination.value.pageSize;
+  const to = pagination.value.page * pagination.value.pageSize - 1;
+
+  const { data, error, count } = await query.range(from, to);
 
   if (error) {
     console.log(error);

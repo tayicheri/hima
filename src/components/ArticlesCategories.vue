@@ -15,6 +15,12 @@
     <!-- Categories -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
       <button
+        @click="select('all')"
+        class="bg-white shadow-md rounded-xl p-4 flex items-center justify-center text-center hover:bg-green-100 hover:scale-105 transition transform cursor-pointer"
+      >
+        <span class="font-semibold text-gray-700"> tous </span>
+      </button>
+      <button
         v-for="cat in categories"
         :key="cat.id"
         @click="select(cat.categorie)"
