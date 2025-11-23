@@ -7,7 +7,7 @@
         <h1 class="text-3xl font-bold text-gray-800 mb-4">
           {{ article.title }}
         </h1>
-        <p class="text-gray-600 mb-6">{{ article.categorie }}</p>
+        <p class="text-gray-600 italic mb-6">{{ article.categorie }}</p>
         <img
           v-if="article.image_url"
           :src="article.image_url"
