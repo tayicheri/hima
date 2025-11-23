@@ -13,6 +13,7 @@
           :src="article.image_url"
           alt="Image article"
           class="w-full h-72 object-cover rounded-lg mb-6"
+          loading="lazy"
         />
         <div class="prose max-w-none" v-html="article.content"></div>
         <ListPhoto :article_id="article.id" class="mt-8" />

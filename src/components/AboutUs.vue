@@ -54,6 +54,7 @@
             class="rounded-xl shadow-lg w-full object-cover"
             src="@/assets/about-us/mainreunicomos.png"
             alt="Action de l'association HIMA"
+            loading="lazy"
           />
         </div>
       </div>

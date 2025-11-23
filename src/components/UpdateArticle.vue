@@ -74,6 +74,7 @@
           <img
             :src="imagePreview"
             class="w-48 h-48 object-cover rounded-md border"
+            loading="lazy"
           />
         </div>
       </div>

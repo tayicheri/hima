@@ -219,6 +219,7 @@ async function search(term) {
             v-if="m.type === 'image'"
             :src="m.url"
             class="w-full h-32 object-cover"
+            loading="lazy"
           />
           <video v-if="m.type === 'video'" controls class="w-full h-32">
             <source :src="m.url" type="video/mp4" />

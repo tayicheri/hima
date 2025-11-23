@@ -23,6 +23,7 @@
           src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"
           alt="PayPal"
           class="h-6 w-auto mr-3"
+          loading="lazy"
         />
         Faire un don via PayPal
       </a>

@@ -11,6 +11,7 @@
       :src="image_url"
       alt="Projet"
       class="w-full h-40 object-cover rounded-t-lg mb-4"
+      loading="lazy"
     />
     <h3 class="text-xl font-bold text-gray-800">{{ title }}</h3>
     <p
@@ -33,6 +34,7 @@
       :src="image_url"
       alt="Projet"
       class="w-full h-40 object-cover rounded-t-lg mb-4"
+      loading="lazy"
     />
     <h3 class="text-sm text-center font-bold text-gray-800">{{ title }}</h3>
   </div>

@@ -19,6 +19,7 @@
           :src="src"
           :alt="alt"
           class="max-h-full max-w-full rounded shadow-lg"
+          loading="lazy"
         />
         <button
           class="absolute top-4 right-4 text-white text-3xl font-bold"
