@@ -42,6 +42,7 @@
 import { ref, onMounted, nextTick } from "vue";
 import Card from "@/components/Card.vue";
 import supabase from "@/lib/supabaseClient";
+import { slugify } from "@/utils/string";
 
 const scrollContainer = ref<HTMLElement | null>(null);
 const canScrollLeft = ref(false);
@@ -85,17 +86,6 @@ const fetchProjects = async () => {
       link: `/articles/${slugify(a.categorie)}/${slugify(a.title)}-${a.id}`,
     })) || [];
 };
-// 🔠 Fonction pour slugifier une chaîne
-function slugify(str: string) {
-  return str
-    .toString()
-    .normalize("NFD") // enlever les accents
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-") // remplacer tout ce qui n'est pas alphanum par "-"
-    .replace(/^-+|-+$/g, ""); // enlever les "-" en début/fin
-}
 
 onMounted(async () => {
   await fetchProjects();
