@@ -9,7 +9,6 @@
           src="/hima_dark_no_bg.png"
           alt="Logo de l'association"
           class="w-full h-full object-contain"
-          loading="lazy"
         />
       </div>
 
