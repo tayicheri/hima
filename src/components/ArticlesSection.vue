@@ -72,7 +72,8 @@ const fetchProjects = async () => {
     .select("id, title,categorie, content, image_url")
     .eq("publie", true)
     .eq("type", "article")
-    .order("id", { ascending: false });
+    .order("id", { ascending: false })
+    .limit(10);
 
   if (error) {
     console.error("Erreur fetch articles:", error.message);
