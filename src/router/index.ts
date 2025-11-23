@@ -2,11 +2,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
 import Admin from "@/views/Admin.vue";
-import ListArticles from "@/components/ListArticles.vue";
+import ListArticlesAdmin from "@/components/ListArticlesAdmin.vue";
 import CreateArticle from "@/components/CreateArticle.vue";
 import supabase from "@/lib/supabaseClient";
 import UpdateArticle from "@/components/UpdateArticle.vue";
 import Article from "@/views/Article.vue";
+import NotFound from "@/views/NotFound.vue";
+import Articles from "@/views/Articles.vue";
 
 const routes = [
   {
@@ -15,9 +17,19 @@ const routes = [
     component: Home,
   },
   {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    component: NotFound,
+  },
+  {
     path: "/articles/:categorie/:titre",
     name: "Article",
     component: Article,
+  },
+  {
+    path: "/articles",
+    name: "Articles",
+    component: Articles,
   },
   {
     path: "/lekeza",
@@ -25,9 +37,9 @@ const routes = [
     component: Admin,
     children: [
       {
-        name: "ListArticles",
-        path: "", // /admin → liste
-        component: ListArticles,
+        name: "ListArticlesAdmin",
+        path: "",
+        component: ListArticlesAdmin,
       },
       {
         name: "CreateArticle",

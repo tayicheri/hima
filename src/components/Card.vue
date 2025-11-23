@@ -5,7 +5,7 @@
     tabindex="0"
     @click="() => navigateTo(link)"
     @keydown.enter="() => navigateTo(link)"
-    class="bg-white p-6 cursor-pointer rounded-l-[30px] shadow-lg transform hover:scale-105 transition-transform duration-300 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0"
+    class="bg-white relative p-6 cursor-pointer rounded-l-[30px] shadow-lg transform hover:scale-105 transition-transform duration-300 w-5/6 hidden sm:block sm:w-1/2 md:w-1/3 lg:w-1/4 flex-shrink-0"
   >
     <img
       :src="image_url"
@@ -13,10 +13,28 @@
       class="w-full h-40 object-cover rounded-t-lg mb-4"
     />
     <h3 class="text-xl font-bold text-gray-800">{{ title }}</h3>
-    <p class="text-gray-600 mb-4 line-clamp-4" v-html="content"></p>
-    <a :href="link" class="text-blue-500 hover:text-blue-700"
-      >En savoir plus &rarr;</a
+    <p
+      class="text-gray-600 text-justify mb-4 line-clamp-4"
+      v-html="content"
+    ></p>
+    <a :href="link" class="text-green-600 absolute bottom-4"
+      >Lire la suite &rarr;</a
     >
+  </div>
+
+  <div
+    role="link"
+    tabindex="0"
+    @click="() => navigateTo(link)"
+    @keydown.enter="() => navigateTo(link)"
+    class="sm:hidden p-4 cursor-pointer flex-shrink-0 bg-white w-1/2 rounded-lg shadow-md"
+  >
+    <img
+      :src="image_url"
+      alt="Projet"
+      class="w-full h-40 object-cover rounded-t-lg mb-4"
+    />
+    <h3 class="text-sm text-center font-bold text-gray-800">{{ title }}</h3>
   </div>
 </template>
 
