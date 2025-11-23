@@ -1,5 +1,5 @@
 <template>
-  <ArticleSearch />
+  <ArticleSearch @update-query="searchArticlesByTitle($event)" />
 
   <Transition name="fade">
     <ArticlesCategories
@@ -11,7 +11,11 @@
     <ArticlesSection v-if="!search" />
   </Transition>
   <Transition name="fade">
-    <ListArticles :articles="articlesList" v-if="search" />
+    <ListArticles
+      :articles="articlesList"
+      v-if="search"
+      @go-back="search = false"
+    />
   </Transition>
   <Transition name="fade">
     <Pagination
@@ -30,6 +34,7 @@ import supabase from "@/lib/supabaseClient";
 
 import { ref } from "vue";
 import { slugify } from "@/utils/string";
+import Pagination from "./Pagination.vue";
 
 const search = ref(false);
 const activeSearch = ref({ type: "", value: "" });
@@ -48,14 +53,18 @@ const pagination = ref<{
   total: number;
 }>({
   page: 1,
-  pageSize: 10,
+  pageSize: 4,
   total: 0,
 });
 
-const searchByCategorie = async (categorie: string) => {
-  search.value = true;
+const searchByCategorie = async (
+  categorie: string,
+  isPagination: boolean = false
+) => {
   activeSearch.value = { type: "categorie", value: categorie };
-  pagination.value.page = 1; // reset page
+  if (!isPagination) {
+    pagination.value.page = 1; // reset page
+  }
 
   // 1️⃣ récupérer les articles filtrés
   const { data, error, count } = await supabase
@@ -83,13 +92,69 @@ const searchByCategorie = async (categorie: string) => {
 
   // 3️⃣ mettre à jour la pagination
   pagination.value.total = count ?? 0;
+  search.value = true;
 };
 
 const loadPage = async (page: number) => {
   pagination.value.page = page;
   if (activeSearch.value.type == "categorie") {
-    await searchByCategorie(activeSearch.value.value);
+    await searchByCategorie(activeSearch.value.value, true);
   } else {
+    await searchArticlesByTitle(activeSearch.value.value, true);
   }
 };
+
+const searchArticlesByTitle = async (
+  query: string,
+  isPagination: boolean = false
+) => {
+  activeSearch.value = { type: "title", value: query };
+
+  if (!isPagination) pagination.value.page = 1; // reset page
+  if (query.trim() === "") {
+    search.value = false;
+    articlesList.value = [];
+    pagination.value.total = 0;
+    return;
+  }
+  const { data, error, count } = await supabase
+    .from("articles")
+    .select("id, title, content,categorie, image_url", { count: "exact" })
+    .ilike("title", `%${query}%`)
+    .eq("publie", true)
+    .eq("type", "article")
+    .range(
+      (pagination.value.page - 1) * pagination.value.pageSize,
+      pagination.value.page * pagination.value.pageSize - 1
+    );
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  articlesList.value =
+    data?.map((a) => ({
+      ...a,
+      link: `/articles/${slugify(a.categorie)}/${slugify(a.title)}-${a.id}`,
+    })) || [];
+
+  pagination.value.total = count ?? 0;
+  search.value = true;
+};
 </script>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease; /* 0.5s = 500ms */
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+</style>
