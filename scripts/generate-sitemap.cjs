@@ -23,8 +23,17 @@ async function getArticleSlugs() {
   }
 
   return data.map(
-    (article) => `${article.categorie}/${article.title}-${article.id}`
+    (article) => `${article.categorie}/${slugify(article.title)}-${article.id}`
   );
+}
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-") // remplace les espaces par des tirets
+    .replace(/[^\w\-]+/g, "") // supprime les caractères non-alphanumériques
+    .replace(/\-\-+/g, "-"); // remplace les doubles tirets par un seul
 }
 
 async function generateSitemap() {
