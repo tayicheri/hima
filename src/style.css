@@ -1,7 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Oswald&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Oswald";
+  src: url("/assets/fonts/Oswald/Oswald-Regular.woff2") format("woff2"),
+    url("/assets/fonts/Oswald/Oswald-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "PT Serif";
+  src: url("/assets/fonts/PTSerif/PTSerif-Regular.woff2") format("woff2"),
+    url("/assets/fonts/PTSerif/PTSerif-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("/assets/fonts/Lato/Lato-Regular.woff2") format("woff2"),
+    url("/assets/fonts/Lato/Lato-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
 
 @media print {
   body {
