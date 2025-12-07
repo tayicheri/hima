@@ -89,7 +89,7 @@
     </form>
 
     <!-- Message de confirmation ou erreur -->
-    <p v-if="message" class="mt-4 text-center text-green-600 font-medium">
+    <p v-if="message" class="mt-4 text-center text-green-800 font-medium">
       {{ message }}
     </p>
     <p v-if="errorMessage" class="mt-4 text-center text-red-600 font-medium">

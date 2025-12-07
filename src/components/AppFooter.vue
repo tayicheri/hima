@@ -38,12 +38,14 @@
         <div class="flex justify-center md:justify-end space-x-4">
           <a
             :href="SOCIALS.facebook"
+            aria-label="visiter notre page Facebook"
             target="_blank"
             class="text-gray-400 hover:text-white"
           >
             <i class="fab fa-facebook-square text-2xl"></i>
           </a>
           <a
+            aria-label="visiter notre page tiktok"
             :href="SOCIALS.tiktok"
             target="_blank"
             class="text-gray-400 hover:text-white"
@@ -52,6 +54,7 @@
           </a>
           <a
             :href="SOCIALS.instagram"
+            aria-label="visiter notre page Instagram"
             target="_blank"
             class="text-gray-400 hover:text-white"
           >

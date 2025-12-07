@@ -28,9 +28,10 @@
           <a href="#contact" class="text-lg mx-4 hover:text-blue-400"
             >Contact</a
           >
+
           <a
             href="#donation"
-            class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-400 transition"
+            class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-500 transition"
             >Adhérer</a
           >
         </nav>

@@ -1,6 +1,7 @@
 <template>
   <button
     @click="scrollToNextSection"
+    aria-label="Scroll jusqu'à la prochaine section"
     class="transform bg-transparent text-white hover:text-blue transition-transform duration-500 cursor-pointer hover:scale-150"
   >
     <i

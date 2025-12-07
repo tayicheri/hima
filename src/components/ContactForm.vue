@@ -61,7 +61,7 @@
             Envoyer
           </button>
         </div>
-        <div v-if="submitted" class="mt-4 text-green-600 text-center">
+        <div v-if="submitted" class="mt-4 text-green-800 text-center">
           Merci pour votre message. Nous vous contacterons bientôt.
         </div>
       </form>

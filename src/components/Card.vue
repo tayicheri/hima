@@ -18,7 +18,7 @@
       class="text-gray-600 text-justify mb-4 line-clamp-4"
       v-html="content"
     ></p>
-    <a :href="link" class="text-green-600 absolute bottom-4"
+    <a :href="link" class="text-green-800 absolute bottom-4"
       >Lire la suite &rarr;</a
     >
   </div>
