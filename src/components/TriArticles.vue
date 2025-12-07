@@ -45,6 +45,7 @@ const articlesList = ref<
     content: string;
     image_url: string;
     link: string;
+    created_at: string;
   }>
 >([]);
 const pagination = ref<{
@@ -68,7 +69,9 @@ const searchByCategorie = async (
 
   let query = supabase
     .from("articles")
-    .select("id, title, content, categorie, image_url", { count: "exact" })
+    .select("id, title, content, categorie, image_url,created_at", {
+      count: "exact",
+    })
     .eq("publie", true)
     .eq("type", "article");
 
@@ -123,7 +126,9 @@ const searchArticlesByTitle = async (
   }
   const { data, error, count } = await supabase
     .from("articles")
-    .select("id, title, content,categorie, image_url", { count: "exact" })
+    .select("id, title, content,categorie, image_url,created_at", {
+      count: "exact",
+    })
     .ilike("title", `%${query}%`)
     .eq("publie", true)
     .eq("type", "article")

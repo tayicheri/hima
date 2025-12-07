@@ -28,6 +28,8 @@ import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import ListPhoto from "@/components/ListPhoto.vue";
 import supabase from "@/lib/supabaseClient";
+import { useHead } from "@vueuse/head";
+import { slugify } from "@/utils/string";
 
 interface Article {
   id: number;
@@ -35,6 +37,9 @@ interface Article {
   content: string;
   categorie: string;
   image_url: string;
+  author: string;
+  created_at: string;
+  link: string;
 }
 
 const route = useRoute();
@@ -74,7 +79,6 @@ async function fetchArticle() {
     router.push("/404"); // 👈 redirection vers ta page 404
     return;
   }
-  console.log(data);
 
   if (!data) {
     loading.value = false;
@@ -82,7 +86,15 @@ async function fetchArticle() {
     return;
   }
 
-  article.value = data;
+  const link = `/articles/${slugify(data.categorie)}/${slugify(data.title)}-${
+    data.id
+  }`;
+
+  article.value = {
+    ...data,
+    link,
+  };
+
   loading.value = false;
   scrollToNextSection();
 }
@@ -95,6 +107,42 @@ const scrollToNextSection = () => {
 };
 onMounted(() => {
   fetchArticle();
+});
+
+useHead(() => {
+  if (!article.value) return {}; // ne rien injecter tant que les données ne sont pas prêtes
+  console.log(article.value);
+
+  return {
+    script: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Article", // ou "NewsArticle" si actualité
+          headline: article.value.title,
+          image: article.value.image_url, // URL de l'image principale
+          datePublished: article.value.created_at,
+          author: {
+            "@type": "Person",
+            name: article.value.author || "HIMA Association",
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "HIMA",
+            logo: {
+              "@type": "ImageObject",
+              url: "https://hima-narihimepvoidzima.fr/hima_dark_no_bg.png",
+            },
+          },
+          mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://hima-narihimepvoidzima.fr${article.value.link}`,
+          },
+        }),
+      },
+    ],
+  };
 });
 </script>
 

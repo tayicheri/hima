@@ -33,6 +33,7 @@ const { articles } = defineProps<{
     content: string;
     image_url: string;
     link: string;
+    created_at: string;
   }[];
 }>();
 const emit = defineEmits<{
@@ -53,15 +54,15 @@ useHead(() => ({
           "Parcourez nos articles, actualités et actions humanitaires réalisées par l’association HIMA.",
         hasPart: {
           "@type": "ItemList",
-          itemListElement: articles.value.map((article, index) => ({
+          itemListElement: articles.map((article, index) => ({
             "@type": "ListItem",
             position: index + 1,
             item: {
               "@type": "Article",
               headline: article.title,
-              url: `https://hima-narihimepvoidzima.fr/articles/${article.slug}`,
-              datePublished: article.publishedAt,
-              image: article.cover,
+              url: `https://hima-narihimepvoidzima.fr${article.link}`,
+              datePublished: article.created_at,
+              image: article.image_url,
             },
           })),
         },
