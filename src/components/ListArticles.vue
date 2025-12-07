@@ -24,6 +24,7 @@
   </div>
 </template>
 <script setup lang="ts">
+import { useHead } from "@vueuse/head";
 import Card from "./Card.vue";
 const { articles } = defineProps<{
   articles: {
@@ -32,10 +33,41 @@ const { articles } = defineProps<{
     content: string;
     image_url: string;
     link: string;
+    created_at: string;
   }[];
 }>();
 const emit = defineEmits<{
   (e: "go-back"): void;
 }>();
 const goBack = () => emit("go-back");
+
+useHead(() => ({
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Articles - HIMA",
+        url: "https://hima-narihimepvoidzima.fr/articles",
+        description:
+          "Parcourez nos articles, actualités et actions humanitaires réalisées par l’association HIMA.",
+        hasPart: {
+          "@type": "ItemList",
+          itemListElement: articles.map((article, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            item: {
+              "@type": "Article",
+              headline: article.title,
+              url: `https://hima-narihimepvoidzima.fr${article.link}`,
+              datePublished: article.created_at,
+              image: article.image_url,
+            },
+          })),
+        },
+      }),
+    },
+  ],
+}));
 </script>
