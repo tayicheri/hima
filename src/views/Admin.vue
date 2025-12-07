@@ -68,7 +68,10 @@ async function signOut() {
     <!-- ✅ Gestion articles -->
     <div v-else>
       <div class="flex justify-between items-center mb-4">
-        <h2 class="text-2xl font-bold" @click="$router.push('/lekeza')">
+        <h2
+          class="text-2xl font-bold cursor-pointer"
+          @click="$router.push('/lekeza')"
+        >
           Gestion des articles
         </h2>
         <div>
