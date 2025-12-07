@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import supabase from "@/lib/supabaseClient";
+import { useHead } from "@vueuse/head";
 
 const emit = defineEmits(["select-category"]);
 
@@ -67,4 +68,21 @@ onMounted(async () => {
 
   loading.value = false;
 });
+
+useHead(() => ({
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        itemListElement: categories.value.map((c, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: c.categorie,
+        })),
+      }),
+    },
+  ],
+}));
 </script>
