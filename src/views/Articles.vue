@@ -7,6 +7,13 @@ import TriArticles from "@/components/TriArticles.vue";
 import { useHead } from "@vueuse/head";
 
 useHead({
+  title: `articles - HIMA`,
+  meta: [
+    {
+      name: "description",
+      content: `Consultez les articles et actualités de l'association HIMA : aide sociale, projets éducatifs et culturels aux Comores.`,
+    },
+  ],
   script: [
     {
       type: "application/ld+json",

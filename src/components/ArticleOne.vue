@@ -40,6 +40,7 @@ interface Article {
   author: string;
   created_at: string;
   link: string;
+  meta_description: string;
 }
 
 const route = useRoute();
@@ -114,6 +115,14 @@ useHead(() => {
   console.log(article.value);
 
   return {
+    title: `${article.value.title} - HIMA`,
+    meta: [
+      {
+        name: "description",
+        content:
+          article.value.meta_description || "Découvrez notre article sur HIMA.",
+      },
+    ],
     script: [
       {
         type: "application/ld+json",
