@@ -5,6 +5,8 @@ import DonationSection from "@/components/DonationSection.vue";
 import ContactForm from "@/components/ContactForm.vue";
 import TriArticles from "@/components/TriArticles.vue";
 import { useHead } from "@vueuse/head";
+import { onMounted } from "vue";
+import { scrollToNextSection } from "@/utils/scroll";
 
 useHead({
   title: `articles - HIMA`,
@@ -33,6 +35,10 @@ useHead({
       }),
     },
   ],
+});
+
+onMounted(() => {
+  scrollToNextSection();
 });
 </script>
 

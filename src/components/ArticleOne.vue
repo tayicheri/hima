@@ -30,6 +30,7 @@ import ListPhoto from "@/components/ListPhoto.vue";
 import supabase from "@/lib/supabaseClient";
 import { useHead } from "@vueuse/head";
 import { slugify } from "@/utils/string";
+import { scrollToNextSection } from "@/utils/scroll";
 
 interface Article {
   id: number;
@@ -99,13 +100,7 @@ async function fetchArticle() {
   loading.value = false;
   scrollToNextSection();
 }
-const scrollToNextSection = () => {
-  // Défiler de 100vh
-  window.scrollBy({
-    top: window.innerHeight, // Défiler de 100vh
-    behavior: "smooth", // Ajoute un défilement fluide
-  });
-};
+
 onMounted(() => {
   fetchArticle();
 });

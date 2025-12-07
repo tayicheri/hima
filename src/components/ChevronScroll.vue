@@ -10,13 +10,7 @@
 </template>
 
 <script setup>
-const scrollToNextSection = () => {
-  // Défiler de 100vh
-  window.scrollBy({
-    top: window.innerHeight, // Défiler de 100vh
-    behavior: "smooth", // Ajoute un défilement fluide
-  });
-};
+import { scrollToNextSection } from "@/utils/scroll";
 </script>
 
 <style scoped>
