@@ -19,17 +19,17 @@
             L'<strong>Association HIMA</strong> est une organisation à but non
             lucratif dédiée à la
             <span class="font-semibold">solidarité internationale</span>
-            et au
-            <span class="font-semibold">développement communautaire</span>
-            durable. Depuis
-            <span class="font-bold">2025</span>, notre mission principale est
-            d'apporter une <strong>aide humanitaire</strong> concrète et un
-            soutien essentiel aux populations vulnérables, en particulier dans
-            les domaines de
-            <span class="font-medium"
-              >l'éducation, la santé, l'alimentation, l'agriculture, la
-              culture.</span
-            >.
+            et à l'<span class="font-semibold">aide sociale </span> ciblée.Notre
+            mission principale est d'apporter un soutien essentiel aux
+            populations vulnérables des <strong> Comores</strong> , en
+            particulier dans les domaines de l'éducation, la santé,
+            l'alimentation, l'agriculture, et la culture. Depuis
+            <span class="font-bold">2025</span>,l'<strong
+              >Association HIMA</strong
+            >
+            s'engage dans des projets humanitaires de
+            <strong>développement communautaire</strong> aux
+            <strong>Comores</strong>, visant une autonomisation durable.
           </p>
 
           <h3
