@@ -17,7 +17,7 @@
         href="https://www.paypal.com/donate/?hosted_button_id=T6M7UBSGK8ZBC"
         target="_blank"
         rel="noopener"
-        class="inline-flex items-center text-blue-600 border-blue-600 hover:text-white hover:bg-blue-600 font-semibold text-lg px-6 py-3 rounded-xl shadow-lg transition duration-300"
+        class="inline-flex items-center text-gray-800 border-blue-600 hover:text-white hover:bg-gray-800 font-semibold text-lg px-6 py-3 rounded-xl shadow-lg transition duration-300"
       >
         <img
           src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg"

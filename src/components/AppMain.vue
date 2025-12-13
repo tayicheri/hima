@@ -5,6 +5,8 @@ import DonationSection from "@/components/DonationSection.vue";
 import AboutUs from "./AboutUs.vue";
 import ArticlesSection from "./ArticlesSection.vue";
 import ImpactSection from "./ImpactSection.vue";
+import SeoPresentationBlock from "@/components/SeoPresentationBlock.vue";
+import ValeursSection from "@/components/ValeursSection.vue";
 </script>
 <template>
   <main class="flex-grow flex flex-col gap-7">
@@ -12,6 +14,8 @@ import ImpactSection from "./ImpactSection.vue";
 
     <ActionsSection />
     <ImpactSection />
+    <SeoPresentationBlock />
+    <ValeursSection />
     <ArticlesSection />
 
     <ContactForm />

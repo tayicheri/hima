@@ -5,12 +5,12 @@ import AppMain from "@/components/AppMain.vue";
 import { useHead } from "@vueuse/head";
 
 useHead({
-  title: "HIMA - Association pour le développement social aux Comores",
+  title: "Association HIMA | Aide Humanitaire & Développement Communautaire",
   meta: [
     {
       name: "description",
       content:
-        "HIMA est une association engagée pour le développement social, culturel et éducatif des Comores, soutenant la jeunesse, la culture et la cohésion communautaire.",
+        "Découvrez l'Association HIMA, notre mission d'aide humanitaire et nos projets de développement communautaire durable. Engagez-vous pour la solidarité internationale.",
     },
   ],
 
