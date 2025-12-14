@@ -12,7 +12,7 @@
           v-if="article.image_url"
           :src="article.image_url"
           alt="Image article"
-          class="w-full h-72 object-cover rounded-lg mb-6"
+          class="w-full max-h-72 lg:max-h-full object-cover rounded-lg mb-6"
           loading="lazy"
         />
         <div class="prose max-w-none" v-html="article.content"></div>
