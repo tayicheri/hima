@@ -31,7 +31,7 @@
           </div>
           <div class="mt-8 text-center text-gray-400 text-xs">
             <p>&copy; 2025 Association Hima. Tous droits réservés.</p>
-            <p>Site réalisé par MOHAMED Taissir</p>
+            <p>Site réalisé bénévolement par un membre de l'association</p>
           </div>
         </div>
         <!-- Réseaux sociaux -->
