@@ -6,6 +6,12 @@ import { useHead } from "@vueuse/head";
 
 useHead({
   title: "Association HIMA | Aide Humanitaire & Développement Communautaire",
+  link: [
+    {
+      rel: "canonical",
+      href: `https://hima-narihimepvoidzima.fr`,
+    },
+  ],
   meta: [
     {
       name: "description",

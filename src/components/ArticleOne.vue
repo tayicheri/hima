@@ -111,6 +111,12 @@ useHead(() => {
 
   return {
     title: `${article.value.title} - HIMA`,
+    link: [
+      {
+        rel: "canonical",
+        href: `https://hima-narihimepvoidzima.fr${article.value.link}`,
+      },
+    ],
     meta: [
       {
         name: "description",
