@@ -13,19 +13,21 @@
         </div>
 
         <!-- Liens -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col gap items-center">
           <div class="flex flex-col md:flex-row mb-6 md:mb-0">
-            <a href="#about" class="text-sm text-gray-400 hover:text-white mx-2"
+            <a
+              href="#about"
+              class="text-base px-4 py-3 md:mx-2 text-gray-400 hover:text-white"
               >À propos</a
             >
             <a
               href="#projects"
-              class="text-sm text-gray-400 hover:text-white mx-2"
+              class="text-base px-4 py-3 md:mx-2 text-gray-400 hover:text-white"
               >Nos Projets</a
             >
             <a
               href="#contact"
-              class="text-sm text-gray-400 hover:text-white mx-2"
+              class="text-base px-4 py-3 md:mx-2 text-gray-400 hover:text-white"
               >Contact</a
             >
           </div>
