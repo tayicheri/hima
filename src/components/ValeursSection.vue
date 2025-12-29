@@ -22,7 +22,7 @@
             class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4"
           >
             <svg
-              class="h-6 w-6 text-green-600"
+              class="h-6 w-6 text-[#00610B]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -90,7 +90,7 @@
             class="flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4"
           >
             <svg
-              class="h-6 w-6 text-green-600"
+              class="h-6 w-6 text-[#00610B]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"

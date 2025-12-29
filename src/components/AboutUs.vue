@@ -29,19 +29,19 @@
           </div>
           <div v-else class="flex gap-6">
             <div class="text-center">
-              <div class="text-3xl font-bold text-green-600">
+              <div class="text-3xl font-bold text-[#00610B]">
                 {{ stats.family }}+
               </div>
               <div class="text-sm text-gray-600">Familles aidées</div>
             </div>
             <div class="text-center">
-              <div class="text-3xl font-bold text-green-600">
+              <div class="text-3xl font-bold text-[#00610B]">
                 {{ stats.action }}+
               </div>
               <div class="text-sm text-gray-600">Ateliers organisés</div>
             </div>
             <div class="text-center">
-              <div class="text-3xl font-bold text-green-600">
+              <div class="text-3xl font-bold text-[#00610B]">
                 {{ stats.island }}
               </div>
               <div class="text-sm text-gray-600">Îles d'intervention</div>

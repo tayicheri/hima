@@ -11,7 +11,7 @@
         <div
           class="flex flex-col items-center bg-white shadow-md p-6 rounded-xl"
         >
-          <i class="fas fa-utensils text-4xl text-green-600 mb-3"></i>
+          <i class="fas fa-utensils text-4xl text-[#00610B] mb-3"></i>
           <div class="text-3xl font-bold text-gray-800">{{ stats.repas }}+</div>
           <div class="text-gray-600">Repas distribués</div>
         </div>

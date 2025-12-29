@@ -43,7 +43,7 @@
             en l'autonomisation des communautés. Les
             <a
               href="/articles"
-              class="text-green-600 hover:text-green-900 font-medium underline"
+              class="text-[#00610B] hover:text-green-900 font-medium underline"
               >projets humanitaires</a
             >
             menés par HIMA visent à construire des solutions durables.
@@ -52,7 +52,7 @@
           <ul class="space-y-4 mt-4 text-base">
             <li class="flex items-start">
               <svg
-                class="h-6 w-6 text-green-600 **mr-3** flex-shrink-0 mt-0.5"
+                class="h-6 w-6 text-[#00610B] **mr-3** flex-shrink-0 mt-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -73,7 +73,7 @@
 
             <li class="flex items-start">
               <svg
-                class="h-6 w-6 text-green-600 **mr-3** flex-shrink-0 mt-0.5"
+                class="h-6 w-6 text-[#00610B] **mr-3** flex-shrink-0 mt-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -93,7 +93,7 @@
 
             <li class="flex items-start">
               <svg
-                class="h-6 w-6 text-green-600 **mr-3** flex-shrink-0 mt-0.5"
+                class="h-6 w-6 text-[#00610B] **mr-3** flex-shrink-0 mt-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -113,7 +113,7 @@
 
             <li class="flex items-start">
               <svg
-                class="h-6 w-6 text-green-600 **mr-3** flex-shrink-0 mt-0.5"
+                class="h-6 w-6 text-[#00610B] **mr-3** flex-shrink-0 mt-0.5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
