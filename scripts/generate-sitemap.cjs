@@ -23,7 +23,8 @@ async function getArticleSlugs() {
   }
 
   return data.map(
-    (article) => `${article.categorie}/${slugify(article.title)}-${article.id}`
+    (article) =>
+      `${slugify(article.categorie)}/${slugify(article.title)}-${article.id}`
   );
 }
 function slugify(text) {
