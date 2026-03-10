@@ -1,6 +1,7 @@
 <!-- components/AboutUs.vue -->
 <template>
   <section id="about" class="py-16 bg-gray-50">
+    <h1 class="text-4xl font-bold text-center mt-3 mb-3">Association HIMA</h1>
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl font-bold text-gray-800">Qui sommes-nous ?</h2>
