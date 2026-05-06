@@ -8,7 +8,7 @@ Learn more about the recommended Project Setup and IDE Support in the [Vue Docs 
 
 docker compose up vue-dev → mode développement.
 
-docker compose up -d vue-prod caddy → mode production.
+sudo docker-compose up -d vue-prod → mode production.
 
 vider docker system prune -a --volumes
 
