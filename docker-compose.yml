@@ -17,7 +17,8 @@ services:
       - ./dist:/usr/share/nginx/html:ro # Monte le dist local en lecture seule
       - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
     networks:
-      - caddy_net
+      caddy_net:
+        external: true
     expose:
       - "80" # Expose le port interne sans le mapper directement sur l'hôte
 
